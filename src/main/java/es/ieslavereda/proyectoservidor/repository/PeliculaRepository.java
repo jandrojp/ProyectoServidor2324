@@ -42,7 +42,7 @@ public class PeliculaRepository implements IPeliculaRepository {
     @Override
     public Pelicula deletePelicula(int id) throws SQLException {
         Pelicula pelicula = getPelicula(id);
-        String query = "DELETE FROM cliente WHERE dniCliente = ?"; // Cambiar query
+        String query = "DELETE FROM pelicula WHERE idContenido = ?";
 
         if (pelicula == null)
             return null;
@@ -85,7 +85,7 @@ public class PeliculaRepository implements IPeliculaRepository {
     @Override
     public Pelicula getPelicula(int id) throws SQLException {
         Pelicula pelicula = null;
-        String query = "SELECT * FROM cliente WHERE dniCliente = ?"; // Cambiar query
+        String query = "SELECT idcontenido, TIPO, TITULO, IDIOMA, GENERO, FECHA_ESTRENO, DESCRIPCION, DIRECTOR, ACTORES, DURACION, VALORACION_MEDIA  FROM contenido WHERE EXISTS(SELECT idcontenido from pelicula) AND idcontenido = ?";
 
         try (Connection connection = DataSource.getMyOracleDataSource().getConnection();
              PreparedStatement ps = connection.prepareStatement(query)){
