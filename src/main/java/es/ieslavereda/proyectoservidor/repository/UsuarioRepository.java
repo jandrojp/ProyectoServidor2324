@@ -3,7 +3,6 @@ package es.ieslavereda.proyectoservidor.repository;
 import es.ieslavereda.proyectoservidor.repository.model.DataSource;
 import es.ieslavereda.proyectoservidor.repository.model.Usuario;
 import org.springframework.stereotype.Repository;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

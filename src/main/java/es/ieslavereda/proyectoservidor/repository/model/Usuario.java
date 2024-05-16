@@ -28,7 +28,7 @@ public class Usuario {
         if (object == null || !(object instanceof Usuario))
             return false;
         Usuario usuario = (Usuario) object;
-        return dni == usuario.getDni();
+        return dni.equals(usuario.getDni());
     }
 
     @Override

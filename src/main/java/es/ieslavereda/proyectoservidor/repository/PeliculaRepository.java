@@ -2,9 +2,7 @@ package es.ieslavereda.proyectoservidor.repository;
 
 import es.ieslavereda.proyectoservidor.repository.model.DataSource;
 import es.ieslavereda.proyectoservidor.repository.model.Pelicula;
-import es.ieslavereda.proyectoservidor.repository.model.Usuario;
 import org.springframework.stereotype.Repository;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +12,31 @@ public class PeliculaRepository implements IPeliculaRepository {
 
     @Override
     public Pelicula updatePelicula(Pelicula pelicula) throws SQLException {
-        return null;
+        String query = "UPDATE cliente SET usuario = ?, contraseña = ?, nombre = ?, apellidos = ?, email = ?, domicilio = ?, codigo_postal = ?, fecha_nacimiento = ?, tarjeta_credito = ? where dniCliente = ?"; // Cambiar query
+        Pelicula pelicula1 = getPelicula(pelicula.getId());
+
+        if (pelicula1 == null)
+            return null;
+
+        try (Connection connection = DataSource.getMyOracleDataSource().getConnection();
+             PreparedStatement ps = connection.prepareStatement(query)) {
+
+            ps.setString(1,pelicula1.getTipo());
+            ps.setString(2,pelicula1.getTitulo());
+            ps.setString(3,pelicula1.getIdioma());
+            ps.setString(4,pelicula1.getGenero());
+            ps.setDate(5,pelicula1.getFecha_estreno());
+            ps.setString(6,pelicula1.getDescripcion());
+            ps.setString(7,pelicula1.getDirector());
+            ps.setString(8,pelicula1.getActores());
+            ps.setInt(9,pelicula1.getDuracion());
+            ps.setDouble(10,pelicula1.getValoracion_media());
+            ps.setInt(11,pelicula1.getId());
+
+            ps.executeUpdate();
+        }
+
+        return getPelicula(pelicula.getId());
     }
 
     @Override

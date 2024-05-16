@@ -1,8 +1,6 @@
 package es.ieslavereda.proyectoservidor.repository;
 
 import es.ieslavereda.proyectoservidor.repository.model.Pelicula;
-import es.ieslavereda.proyectoservidor.repository.model.Usuario;
-
 import java.sql.SQLException;
 import java.util.List;
 
