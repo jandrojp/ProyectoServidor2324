@@ -165,5 +165,27 @@ public class UsuarioRepository implements IUsuarioRepository {
         return usuario;
     }
 
+    @Override
+    public boolean authenticate(String login, String passwd) {
+        boolean autenticado = false;
+
+        String query = "SELECT COUNT(*) FROM EMPLEADO WHERE usuario = ? AND contraseña = ?";
+        try (Connection connection = DataSource.getMyOracleDataSource().getConnection();
+            PreparedStatement ps = connection.prepareStatement(query)
+        ){
+            ps.setString(1,login);
+            ps.setString(2,passwd);
+            ResultSet resultSet = ps.executeQuery();
+            resultSet.next();
+
+            if (resultSet.getInt(1) > 0)
+                autenticado = true;
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return autenticado;
+    }
+
 
 }
