@@ -166,7 +166,7 @@ public class UsuarioRepository implements IUsuarioRepository {
     }
 
     @Override
-    public boolean authenticate(String login, String passwd) {
+    public boolean authenticate(String login, String passwd) throws SQLException {
         boolean autenticado = false;
 
         String query = "SELECT COUNT(*) FROM EMPLEADO WHERE usuario = ? AND contraseña = ?";
@@ -181,9 +181,8 @@ public class UsuarioRepository implements IUsuarioRepository {
             if (resultSet.getInt(1) > 0)
                 autenticado = true;
 
-        } catch (SQLException e){
-            e.printStackTrace();
         }
+
         return autenticado;
     }
 

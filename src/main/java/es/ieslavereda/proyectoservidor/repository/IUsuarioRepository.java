@@ -12,5 +12,5 @@ public interface IUsuarioRepository {
     Usuario updateUsuario(Usuario usuario) throws SQLException;
     Usuario deleteUsuario(String dni) throws SQLException;
     List<Usuario> getAllUsuarios() throws SQLException;
-    boolean authenticate (String login, String passwd);
+    boolean authenticate(String login, String passwd) throws SQLException;
 }
