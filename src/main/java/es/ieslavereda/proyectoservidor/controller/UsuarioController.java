@@ -76,6 +76,22 @@ public class UsuarioController {
         }
     }
 
+    @PostMapping("/usuarios/autenticar")
+    public ResponseEntity<?> authenticate(@RequestBody String usuario, String contrasenya) {
+        try {
+            boolean autenticado = service.authenticate(usuario, contrasenya);
+            if (autenticado)
+                return new ResponseEntity<>("El usuario ya existe",HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(autenticado,HttpStatus.OK);
+
+        }  catch (SQLException e) {
+            Map<String,Object> response = new HashMap<>();
+            response.put("code",e.getErrorCode());
+            response.put(("message"),e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PutMapping("/usuarios")
     public ResponseEntity<?> updateUsuario(@RequestBody Usuario usuario) {
         try{
