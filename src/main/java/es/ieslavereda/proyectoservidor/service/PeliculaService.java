@@ -2,6 +2,7 @@ package es.ieslavereda.proyectoservidor.service;
 
 import es.ieslavereda.proyectoservidor.repository.PeliculaRepository;
 import es.ieslavereda.proyectoservidor.repository.model.Pelicula;
+import es.ieslavereda.proyectoservidor.repository.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.sql.SQLException;
@@ -23,6 +24,10 @@ public class PeliculaService {
 
     public Pelicula deletePelicula(int id) throws SQLException {
         return repository.deletePelicula(id);
+    }
+
+    public Pelicula addPelicula(Pelicula pelicula) throws SQLException {
+        return repository.addPelicula(pelicula);
     }
 
 }

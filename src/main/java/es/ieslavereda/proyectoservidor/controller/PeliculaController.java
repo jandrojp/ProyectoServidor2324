@@ -63,6 +63,22 @@ public class PeliculaController {
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PostMapping("/peliculas")
+    public ResponseEntity<?> addPelicula(@RequestBody Pelicula pelicula) {
+        try {
+            Pelicula pelicula1 = service.addPelicula(pelicula);
+            if (pelicula1 == null)
+                return new ResponseEntity<>("El usuario ya existe",HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(pelicula1,HttpStatus.OK);
+
+        }  catch (SQLException e) {
+            Map<String,Object> response = new HashMap<>();
+            response.put("code",e.getErrorCode());
+            response.put(("message"),e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
 
 
