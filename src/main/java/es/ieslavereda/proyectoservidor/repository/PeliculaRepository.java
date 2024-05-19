@@ -12,7 +12,7 @@ public class PeliculaRepository implements IPeliculaRepository {
 
     @Override
     public Pelicula updatePelicula(Pelicula pelicula) throws SQLException {
-        String query = "UPDATE cliente SET usuario = ?, contraseña = ?, nombre = ?, apellidos = ?, email = ?, domicilio = ?, codigo_postal = ?, fecha_nacimiento = ?, tarjeta_credito = ? where dniCliente = ?"; // Cambiar query
+        String query = "UPDATE contenido SET TIPO = ?, TITULO = ?, IDIOMA = ?, GENERO = ?, FECHA_ESTRENO = ?, DESCRIPCION = ?, DIRECTOR = ?, ACTORES = ?, DURACION = ?, VALORACION_MEDIA = ? WHERE idcontenido = ?";
         Pelicula pelicula1 = getPelicula(pelicula.getId());
 
         if (pelicula1 == null)
@@ -42,7 +42,7 @@ public class PeliculaRepository implements IPeliculaRepository {
     @Override
     public Pelicula deletePelicula(int id) throws SQLException {
         Pelicula pelicula = getPelicula(id);
-        String query = "DELETE FROM pelicula WHERE idContenido = ?";
+        String query = "DELETE FROM contenido WHERE EXISTS (SELECT idcontenido FROM pelicula WHERE pelicula.idcontenido = contenido.idcontenido) AND idcontenido = ?";
 
         if (pelicula == null)
             return null;
@@ -112,7 +112,7 @@ public class PeliculaRepository implements IPeliculaRepository {
 
     @Override
     public Pelicula addPelicula(Pelicula pelicula) throws SQLException {
-        String query = "INSERT INTO cliente(dniCliente, usuario, contraseña, nombre, apellidos, email, domicilio, codigo_postal, fecha_nacimiento, tarjeta_credito) VALUES(?,?,?,?,?,?,?,?,?,?)"; // Cambiar query
+        String query = "INSERT INTO contenido (idcontenido, TIPO, TITULO, IDIOMA, GENERO, FECHA_ESTRENO, DESCRIPCION, DIRECTOR, ACTORES, DURACION, VALORACION_MEDIA) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Pelicula pelicula1 = getPelicula(pelicula.getId());
 
         if (pelicula1 != null)
