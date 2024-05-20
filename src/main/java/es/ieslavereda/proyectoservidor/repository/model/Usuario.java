@@ -20,7 +20,7 @@ public class Usuario {
     private String email;
     private String domicilio;
     private String codigo_postal;
-    private Date fecha_nacimiento;
+    private String fecha_nacimiento;
     private String tarjeta_credito;
 
     @Override

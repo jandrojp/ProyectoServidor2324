@@ -67,7 +67,7 @@ public class PeliculaController {
         try {
             Pelicula pelicula1 = service.addPelicula(pelicula);
             if (pelicula1 == null)
-                return new ResponseEntity<>("El usuario ya existe",HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("La pelicula ya existe",HttpStatus.NOT_FOUND);
             return new ResponseEntity<>(pelicula1,HttpStatus.OK);
 
         }  catch (SQLException e) {
@@ -83,7 +83,7 @@ public class PeliculaController {
         try {
             Pelicula pelicula1 = service.updatePelicula(pelicula);
             if (pelicula1 == null)
-                return new ResponseEntity<>("Usuario no encontrado",HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Pelicula no encontrada",HttpStatus.NOT_FOUND);
             return new ResponseEntity<>(pelicula1,HttpStatus.OK);
 
         }  catch (SQLException e){

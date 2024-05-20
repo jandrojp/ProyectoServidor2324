@@ -12,7 +12,7 @@ public class PeliculaRepository implements IPeliculaRepository {
 
     @Override
     public Pelicula updatePelicula(Pelicula pelicula) throws SQLException {
-        String query = "UPDATE contenido SET TIPO = ?, TITULO = ?, IDIOMA = ?, GENERO = ?, FECHA_ESTRENO = ?, DESCRIPCION = ?, DIRECTOR = ?, ACTORES = ?, DURACION = ?, VALORACION_MEDIA = ? WHERE idcontenido = ?";
+        String query = "UPDATE contenido SET TIPO = ?, TITULO = ?, IDIOMA = ?, GENERO = ?, DESCRIPCION = ?, DIRECTOR = ?, ACTORES = ?, DURACION = ?, VALORACION_MEDIA = ? WHERE idcontenido = ?";
         Pelicula pelicula1 = getPelicula(pelicula.getId());
 
         if (pelicula1 == null)
@@ -25,13 +25,12 @@ public class PeliculaRepository implements IPeliculaRepository {
             ps.setString(2,pelicula1.getTitulo());
             ps.setString(3,pelicula1.getIdioma());
             ps.setString(4,pelicula1.getGenero());
-            ps.setDate(5,pelicula1.getFecha_estreno());
-            ps.setString(6,pelicula1.getDescripcion());
-            ps.setString(7,pelicula1.getDirector());
-            ps.setString(8,pelicula1.getActores());
-            ps.setInt(9,pelicula1.getDuracion());
-            ps.setDouble(10,pelicula1.getValoracion_media());
-            ps.setInt(11,pelicula1.getId());
+            ps.setString(5,pelicula1.getDescripcion());
+            ps.setString(6,pelicula1.getDirector());
+            ps.setString(7,pelicula1.getActores());
+            ps.setInt(8,pelicula1.getDuracion());
+            ps.setDouble(9,pelicula1.getValoracion_media());
+            ps.setInt(10,pelicula1.getId());
 
             ps.executeUpdate();
         }
@@ -55,10 +54,13 @@ public class PeliculaRepository implements IPeliculaRepository {
         return pelicula;
     }
 
+
+
+
     @Override
     public List<Pelicula> getAllPeliculas() throws SQLException {
         List<Pelicula> peliculas = new ArrayList<>();
-        String query = "SELECT idcontenido, TIPO, TITULO, IDIOMA, GENERO, FECHA_ESTRENO, DESCRIPCION, DIRECTOR, ACTORES, DURACION, VALORACION_MEDIA  FROM contenido WHERE EXISTS(SELECT idcontenido from pelicula)";
+        String query = "SELECT idcontenido, TIPO, TITULO, IDIOMA, GENERO, DESCRIPCION, DIRECTOR, ACTORES, DURACION, VALORACION_MEDIA  FROM contenido WHERE EXISTS(SELECT idcontenido from pelicula) and tipo='pelicula'";
 
         try (Connection connection = DataSource.getMyOracleDataSource().getConnection();
             Statement statement = connection.createStatement();
@@ -70,22 +72,23 @@ public class PeliculaRepository implements IPeliculaRepository {
                                 .titulo(rs.getString(3))
                                 .idioma(rs.getString(4))
                                 .genero(rs.getString(5))
-                                .fecha_estreno(rs.getDate(6))
-                                .descripcion(rs.getString(7))
-                                .director(rs.getString(8))
-                                .actores(rs.getString(9))
-                                .duracion(rs.getInt(10))
-                                .valoracion_media(rs.getDouble(11))
+
+                                .descripcion(rs.getString(6))
+                                .director(rs.getString(7))
+                                .actores(rs.getString(8))
+                                .duracion(rs.getInt(9))
+                                .valoracion_media(rs.getDouble(10))
                                 .build());
             }
         }
         return peliculas;
     }
 
+
     @Override
     public Pelicula getPelicula(int id) throws SQLException {
         Pelicula pelicula = null;
-        String query = "SELECT idcontenido, TIPO, TITULO, IDIOMA, GENERO, FECHA_ESTRENO, DESCRIPCION, DIRECTOR, ACTORES, DURACION, VALORACION_MEDIA  FROM contenido WHERE EXISTS(SELECT idcontenido from pelicula) AND idcontenido = ?";
+        String query = "SELECT idcontenido, TIPO, TITULO, IDIOMA, GENERO, DESCRIPCION, DIRECTOR, ACTORES, DURACION, VALORACION_MEDIA  FROM contenido WHERE EXISTS(SELECT idcontenido from pelicula) AND idcontenido = ?";
 
         try (Connection connection = DataSource.getMyOracleDataSource().getConnection();
              PreparedStatement ps = connection.prepareStatement(query)){
@@ -99,12 +102,11 @@ public class PeliculaRepository implements IPeliculaRepository {
                         .titulo(rs.getString(3))
                         .idioma(rs.getString(4))
                         .genero(rs.getString(5))
-                        .fecha_estreno(rs.getDate(6))
-                        .descripcion(rs.getString(7))
-                        .director(rs.getString(8))
-                        .actores(rs.getString(9))
-                        .duracion(rs.getInt(10))
-                        .valoracion_media(rs.getDouble(11))
+                        .descripcion(rs.getString(6))
+                        .director(rs.getString(7))
+                        .actores(rs.getString(8))
+                        .duracion(rs.getInt(9))
+                        .valoracion_media(rs.getDouble(10))
                         .build();
         }
         return pelicula;
@@ -112,7 +114,7 @@ public class PeliculaRepository implements IPeliculaRepository {
 
     @Override
     public Pelicula addPelicula(Pelicula pelicula) throws SQLException {
-        String query = "INSERT INTO contenido (idcontenido, TIPO, TITULO, IDIOMA, GENERO, FECHA_ESTRENO, DESCRIPCION, DIRECTOR, ACTORES, DURACION, VALORACION_MEDIA) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO contenido (idcontenido, TIPO, TITULO, IDIOMA, GENERO, DESCRIPCION, DIRECTOR, ACTORES, DURACION, VALORACION_MEDIA) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Pelicula pelicula1 = getPelicula(pelicula.getId());
 
         if (pelicula1 != null)
@@ -126,17 +128,18 @@ public class PeliculaRepository implements IPeliculaRepository {
             ps.setString(3,pelicula1.getTitulo());
             ps.setString(4,pelicula1.getIdioma());
             ps.setString(5,pelicula1.getGenero());
-            ps.setDate(6,pelicula1.getFecha_estreno());
-            ps.setString(7,pelicula1.getDescripcion());
-            ps.setString(8,pelicula1.getDirector());
-            ps.setString(9,pelicula1.getActores());
-            ps.setInt(10,pelicula1.getDuracion());
-            ps.setDouble(11,pelicula1.getValoracion_media());
+            ps.setString(6,pelicula1.getDescripcion());
+            ps.setString(7,pelicula1.getDirector());
+            ps.setString(8,pelicula1.getActores());
+            ps.setInt(9,pelicula1.getDuracion());
+            ps.setDouble(10,pelicula1.getValoracion_media());
 
             ps.executeUpdate();
         }
         return pelicula1;
     }
+
+
 
 }
 

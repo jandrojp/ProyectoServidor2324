@@ -28,7 +28,7 @@ public class UsuarioRepository implements IUsuarioRepository {
             ps.setString(5,usuario.getEmail());
             ps.setString(6,usuario.getDomicilio());
             ps.setString(7,usuario.getCodigo_postal());
-            ps.setDate(8,usuario.getFecha_nacimiento());
+            ps.setString(8,usuario.getFecha_nacimiento());
             ps.setString(9,usuario.getTarjeta_credito());
             ps.setString(10,usuario.getDni());
 
@@ -103,7 +103,7 @@ public class UsuarioRepository implements IUsuarioRepository {
                         .email(rs.getString(6))
                         .domicilio(rs.getString(7))
                         .codigo_postal(rs.getString(8))
-                        .fecha_nacimiento(rs.getDate(9))
+                        .fecha_nacimiento(rs.getString(9))
                         .tarjeta_credito(rs.getString(10))
                         .build());
             }
@@ -131,7 +131,7 @@ public class UsuarioRepository implements IUsuarioRepository {
                         .email(rs.getString(6))
                         .domicilio(rs.getString(7))
                         .codigo_postal(rs.getString(8))
-                        .fecha_nacimiento(rs.getDate(9))
+                        .fecha_nacimiento(rs.getString(9))
                         .tarjeta_credito(rs.getString(10))
                         .build();
         }
@@ -157,7 +157,7 @@ public class UsuarioRepository implements IUsuarioRepository {
             ps.setString(6,usuario.getEmail());
             ps.setString(7,usuario.getDomicilio());
             ps.setString(8,usuario.getCodigo_postal());
-            ps.setDate(9,usuario.getFecha_nacimiento());
+            ps.setString(9,usuario.getFecha_nacimiento());
             ps.setString(10,usuario.getTarjeta_credito());
 
             ps.executeUpdate();

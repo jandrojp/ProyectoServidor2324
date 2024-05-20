@@ -17,7 +17,6 @@ public class Pelicula {
     private String titulo;
     private String idioma;
     private String genero;
-    private Date fecha_estreno;
     private String descripcion;
     private String director;
     private String actores;
