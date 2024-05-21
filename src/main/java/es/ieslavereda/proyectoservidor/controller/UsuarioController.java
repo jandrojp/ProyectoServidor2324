@@ -16,6 +16,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioService service;
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/usuarios")
     public ResponseEntity<?> getAllUsuarios() {
         try {
