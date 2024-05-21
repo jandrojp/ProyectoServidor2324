@@ -4,6 +4,8 @@ import es.ieslavereda.proyectoservidor.repository.model.DataSource;
 import es.ieslavereda.proyectoservidor.repository.model.Usuario;
 import org.springframework.stereotype.Repository;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +14,7 @@ public class UsuarioRepository implements IUsuarioRepository {
 
     @Override
     public Usuario updateUsuario(Usuario usuario) throws SQLException {
-        String query = "UPDATE cliente SET usuario = ?, contraseña = ?, nombre = ?, apellidos = ?, email = ?, domicilio = ?, codigo_postal = ?, fecha_nacimiento = ?, tarjeta_credito = ? where dniCliente = ?";
+        String query = "UPDATE cliente SET usuario = ?, contraseña = ?, nombre = ?, apellidos = ?, email = ?, domicilio = ?, codigo_postal = ?, tarjeta_credito = ? where dniCliente = ?";
         Usuario usuario1 = getUsuario(usuario.getDni());
 
         if (usuario1 == null)
@@ -28,15 +30,13 @@ public class UsuarioRepository implements IUsuarioRepository {
             ps.setString(5,usuario.getEmail());
             ps.setString(6,usuario.getDomicilio());
             ps.setString(7,usuario.getCodigo_postal());
-            ps.setString(8,usuario.getFecha_nacimiento());
-            ps.setString(9,usuario.getTarjeta_credito());
-            ps.setString(10,usuario.getDni());
+            ps.setString(8,usuario.getTarjeta_credito());
+            ps.setString(9,usuario.getDni());
 
             ps.executeUpdate();
-
         }
 
-        return getUsuario(usuario.getDni());
+        return usuario;
     }
 
     @Override
