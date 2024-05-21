@@ -12,7 +12,7 @@ public class PeliculaRepository implements IPeliculaRepository {
 
     @Override
     public Pelicula updatePelicula(Pelicula pelicula) throws SQLException {
-        String query = "UPDATE contenido SET TIPO = ?, TITULO = ?, IDIOMA = ?, GENERO = ?, DESCRIPCION = ?, DIRECTOR = ?, ACTORES = ?, DURACION = ?, VALORACION_MEDIA = ? WHERE idcontenido = ?";
+        String query = "UPDATE contenido SET tipo = ?, titulo = ?, idioma = ?, genero = ?, descripcion = ?, director = ?, actores = ?, duracion = ?, valoracion_media = ? WHERE EXISTS (SELECT idcontenido FROM pelicula WHERE pelicula.idcontenido = contenido.idcontenido) AND idcontenido = ?";
         Pelicula pelicula1 = getPelicula(pelicula.getId());
 
         if (pelicula1 == null)
@@ -35,7 +35,7 @@ public class PeliculaRepository implements IPeliculaRepository {
             ps.executeUpdate();
         }
 
-        return getPelicula(pelicula.getId());
+        return pelicula;
     }
 
     @Override

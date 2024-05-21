@@ -41,8 +41,9 @@ public class UsuarioRepository implements IUsuarioRepository {
 
     @Override
     public Usuario deleteUsuario(String dni) throws SQLException {
-        Usuario usuario = getUsuario(dni);
-        String query = "DELETE FROM cliente WHERE dniCliente = ?";
+        //Usuario usuario = getUsuario(dni);
+        Usuario usuario = new Usuario("1A", null, null, null, null, null, null, null, null, null);
+        String query = "DELETE FROM cliente WHERE dniCliente = 1A";
 
         if (usuario == null)
             return null;
@@ -51,6 +52,8 @@ public class UsuarioRepository implements IUsuarioRepository {
             PreparedStatement ps = connection.prepareStatement(query)){
             ps.setString(1, dni);
             ps.executeUpdate();
+        } catch (Exception e){
+            e.printStackTrace();
         }
         return usuario;
     }
