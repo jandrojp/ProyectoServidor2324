@@ -17,6 +17,7 @@ public class PeliculaController {
     @Autowired
     private PeliculaService service;
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/peliculas")
     public ResponseEntity<?> getAllPeliculas() {
 

@@ -23,6 +23,7 @@ public class Pelicula {
     private int duracion;
     private double valoracion_media;
     private double preciovisionado;
+    private String portada;
 
     @Override
     public boolean equals(Object object){

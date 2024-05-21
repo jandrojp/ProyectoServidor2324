@@ -60,7 +60,7 @@ public class PeliculaRepository implements IPeliculaRepository {
     @Override
     public List<Pelicula> getAllPeliculas() throws SQLException {
         List<Pelicula> peliculas = new ArrayList<>();
-        String query = "SELECT c.idcontenido, c.TIPO, c.TITULO, c.IDIOMA, c.GENERO, c.DESCRIPCION, c.DIRECTOR, c.ACTORES, c.DURACION, c.VALORACION_MEDIA, t.PRECIOVISIONADO FROM contenido c JOIN pelicula p ON c.idcontenido = p.idcontenido JOIN tarifa t ON p.CODIGO_TARIFA = t.COD_TARIFA WHERE c.TIPO = 'pelicula'";
+        String query = "SELECT c.idcontenido, c.TIPO, c.TITULO, c.IDIOMA, c.GENERO, c.DESCRIPCION, c.DIRECTOR, c.ACTORES, c.DURACION, c.VALORACION_MEDIA, c.portada, t.PRECIOVISIONADO FROM contenido c JOIN pelicula p ON c.idcontenido = p.idcontenido JOIN tarifa t ON p.CODIGO_TARIFA = t.COD_TARIFA WHERE c.TIPO = 'pelicula'";
 
         try (Connection connection = DataSource.getMyOracleDataSource().getConnection();
             Statement statement = connection.createStatement();
@@ -78,7 +78,8 @@ public class PeliculaRepository implements IPeliculaRepository {
                                 .actores(rs.getString(8))
                                 .duracion(rs.getInt(9))
                                 .valoracion_media(rs.getDouble(10))
-                                .preciovisionado(rs.getDouble(11))
+                                .portada(rs.getString(11))
+                                .preciovisionado(rs.getDouble(12))
                                 .build());
             }
         }
