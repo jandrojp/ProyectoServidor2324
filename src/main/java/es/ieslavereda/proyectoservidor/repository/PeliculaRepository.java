@@ -12,7 +12,8 @@ public class PeliculaRepository implements IPeliculaRepository {
 
     @Override
     public Pelicula updatePelicula(Pelicula pelicula) throws SQLException {
-        String query = "UPDATE contenido SET valoracion_media = ? WHERE EXISTS (SELECT idcontenido FROM pelicula WHERE pelicula.idcontenido = contenido.idcontenido) AND idcontenido = ?";
+
+        String query = "UPDATE contenido SET valoracion_media = ? WHERE idcontenido = ?";
         Pelicula pelicula1 = getPelicula(pelicula.getId());
 
         if (pelicula1 == null)

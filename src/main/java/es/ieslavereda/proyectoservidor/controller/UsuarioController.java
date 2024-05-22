@@ -46,6 +46,7 @@ public class UsuarioController {
     }
 
 
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/usuarios/{dni}")
     public ResponseEntity<?> deleteUsuario(@PathVariable("dni") String dni) {
         try {

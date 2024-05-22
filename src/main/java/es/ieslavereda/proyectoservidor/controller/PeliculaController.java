@@ -81,7 +81,7 @@ public class PeliculaController {
         }
     }
 
-    @CrossOrigin(origins = "*")
+
     @PutMapping("/peliculas")
     public ResponseEntity<?> updatePelicula(@RequestBody Pelicula pelicula) {
         try {
