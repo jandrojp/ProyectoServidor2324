@@ -40,6 +40,33 @@ public class UsuarioRepository implements IUsuarioRepository {
     }
 
     @Override
+    public Usuario updateUsuarioDNI(String dni) throws SQLException {
+        String query = "UPDATE cliente SET usuario = ?, contraseña = ?, nombre = ?, apellidos = ?, email = ?, domicilio = ?, codigo_postal = ?, tarjeta_credito = ? where dniCliente = ?";
+        Usuario usuario = getUsuario(dni);
+
+        if (usuario == null)
+            return null;
+
+        try (Connection connection = DataSource.getMyOracleDataSource().getConnection();
+             PreparedStatement ps = connection.prepareStatement(query)) {
+
+            ps.setString(1,usuario.getUsuario());
+            ps.setString(2,usuario.getContrasenya());
+            ps.setString(3,usuario.getNombre());
+            ps.setString(4,usuario.getApellidos());
+            ps.setString(5,usuario.getEmail());
+            ps.setString(6,usuario.getDomicilio());
+            ps.setString(7,usuario.getCodigo_postal());
+            ps.setString(8,usuario.getTarjeta_credito());
+            ps.setString(9,usuario.getDni());
+
+            ps.executeUpdate();
+        }
+
+        return usuario;
+    }
+
+    @Override
     public Usuario deleteUsuario(String dni) throws SQLException {
         Usuario usuario = getUsuario(dni);
         //Usuario usuario = new Usuario("1A", null, null, null, null, null, null, null, null, null);

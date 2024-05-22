@@ -42,6 +42,8 @@ public class PeliculaRepository implements IPeliculaRepository {
         return pelicula;
     }
 
+
+
     @Override
     public Pelicula deletePelicula(int id) throws SQLException {
         Pelicula pelicula = getPelicula(id);
