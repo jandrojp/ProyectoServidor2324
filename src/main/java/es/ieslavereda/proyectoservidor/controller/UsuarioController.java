@@ -114,20 +114,5 @@ public class UsuarioController {
         }
     }
 
-    @CrossOrigin(origins = "*")
-    @PutMapping("/usuarios/{dni}")
-    public ResponseEntity<?> updateUsuarioDNI(@PathVariable("dni") String dni) {
-        try{
-            Usuario usuario1 = service.updateUsuarioDNI(dni);
-            if (usuario1 == null)
-                return new ResponseEntity<>("Usuario no encontrado",HttpStatus.NOT_FOUND);
-            return new ResponseEntity<>(usuario1,HttpStatus.OK);
 
-        }  catch (SQLException e){
-            Map<String,Object> response = new HashMap<>();
-            response.put("code",e.getErrorCode());
-            response.put(("message"),e.getMessage());
-            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 }

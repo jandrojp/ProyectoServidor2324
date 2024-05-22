@@ -47,7 +47,7 @@ public class PeliculaRepository implements IPeliculaRepository {
     @Override
     public Pelicula deletePelicula(int id) throws SQLException {
         Pelicula pelicula = getPelicula(id);
-        String query = "DELETE FROM contenido WHERE EXISTS (SELECT idcontenido FROM pelicula WHERE pelicula.idcontenido = contenido.idcontenido) AND idcontenido = ?";
+        String query = "{call eliminar_content(?)}";
 
         if (pelicula == null)
             return null;
@@ -139,8 +139,7 @@ public class PeliculaRepository implements IPeliculaRepository {
             ps.setString(6,pelicula1.getDescripcion());
             ps.setString(7,pelicula1.getDirector());
             ps.setString(8,pelicula1.getActores());
-            ps.setInt(9,pelicula1.getDuracion());
-            ps.setDouble(10,pelicula1.getValoracion_media());
+            ps.setInt(9,pelicula1.getDuracion());            ps.setDouble(10,pelicula1.getValoracion_media());
 
             ps.executeUpdate();
         }
@@ -150,5 +149,16 @@ public class PeliculaRepository implements IPeliculaRepository {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
 
 

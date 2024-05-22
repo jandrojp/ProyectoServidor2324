@@ -33,9 +33,6 @@ public class UsuarioService {
         return repository.updateUsuario(usuario);
     }
 
-    public Usuario updateUsuarioDNI(String dni) throws SQLException {
-        return repository.updateUsuarioDNI(dni);
-    }
 
     public boolean authenticate(String login, String passwd) throws SQLException {
         return repository.authenticate(login, passwd);

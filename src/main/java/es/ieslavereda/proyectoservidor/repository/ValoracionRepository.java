@@ -16,11 +16,7 @@ public class ValoracionRepository implements IValoracionRepository {
 
     @Override
     public Valoracion addValoracion(Valoracion valoracion) throws SQLException {
-        String query = "INSERT INTO valoracion( idValoracion,idContenido, dniCliente, puntuacion) VALUES(ID_VALORACION.NEXTVALUE,?,?,?)";
-        Valoracion valoracion1 = getValoracion(valoracion.getIdValoracion());
-
-        if (valoracion1 != null)
-            return null;
+        String query = "{call votar(?,?,?)}";
 
         try (Connection connection = DataSource.getMyOracleDataSource().getConnection();
              PreparedStatement ps = connection.prepareStatement(query)) {
