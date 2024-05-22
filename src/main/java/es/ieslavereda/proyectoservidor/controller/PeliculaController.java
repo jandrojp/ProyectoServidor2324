@@ -47,6 +47,7 @@ public class PeliculaController {
         }
     }
 
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/peliculas/{id}")
     public ResponseEntity<?> deletePelicula(@PathVariable("id") int id){
         try {
@@ -63,6 +64,7 @@ public class PeliculaController {
         }
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping("/peliculas")
     public ResponseEntity<?> addPelicula(@RequestBody Pelicula pelicula) {
         try {
@@ -79,6 +81,7 @@ public class PeliculaController {
         }
     }
 
+    @CrossOrigin(origins = "*")
     @PutMapping("/peliculas")
     public ResponseEntity<?> updatePelicula(@RequestBody Pelicula pelicula) {
         try {

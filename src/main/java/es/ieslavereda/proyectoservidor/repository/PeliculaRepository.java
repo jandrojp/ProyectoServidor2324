@@ -12,7 +12,7 @@ public class PeliculaRepository implements IPeliculaRepository {
 
     @Override
     public Pelicula updatePelicula(Pelicula pelicula) throws SQLException {
-        String query = "UPDATE contenido SET tipo = ?, titulo = ?, idioma = ?, genero = ?, descripcion = ?, director = ?, actores = ?, duracion = ?, valoracion_media = ? WHERE EXISTS (SELECT idcontenido FROM pelicula WHERE pelicula.idcontenido = contenido.idcontenido) AND idcontenido = ?";
+        String query = "UPDATE contenido SET valoracion_media = ? WHERE EXISTS (SELECT idcontenido FROM pelicula WHERE pelicula.idcontenido = contenido.idcontenido) AND idcontenido = ?";
         Pelicula pelicula1 = getPelicula(pelicula.getId());
 
         if (pelicula1 == null)
@@ -21,6 +21,7 @@ public class PeliculaRepository implements IPeliculaRepository {
         try (Connection connection = DataSource.getMyOracleDataSource().getConnection();
              PreparedStatement ps = connection.prepareStatement(query)) {
 
+            /*
             ps.setString(1,pelicula1.getTipo());
             ps.setString(2,pelicula1.getTitulo());
             ps.setString(3,pelicula1.getIdioma());
@@ -29,8 +30,10 @@ public class PeliculaRepository implements IPeliculaRepository {
             ps.setString(6,pelicula1.getDirector());
             ps.setString(7,pelicula1.getActores());
             ps.setInt(8,pelicula1.getDuracion());
-            ps.setDouble(9,pelicula1.getValoracion_media());
-            ps.setInt(10,pelicula1.getId());
+
+             */
+            ps.setDouble(1,pelicula1.getValoracion_media());
+            ps.setInt(2,pelicula1.getId());
 
             ps.executeUpdate();
         }
