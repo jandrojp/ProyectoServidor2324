@@ -40,7 +40,6 @@ public class PeliculaController {
     }
 
     /**
-     *
      * @param id a partir del id de la película que es su PK, se devuelve la película
      * @return devuelve la película a partir del entero pasado por parámetro o si no lo ha encontrado
      * @throws SQLException si no encuentra la película por ese Id, devuelve una excepción informando al usuario
@@ -61,6 +60,11 @@ public class PeliculaController {
         }
     }
 
+    /**
+     * borra películas a partir del id pasado por parámetro
+     * @param id será un número entero
+     * @return devuelve si ha podido eliminar la película o no
+     */
     @CrossOrigin(origins = "*")
     @DeleteMapping("/peliculas/{id}")
     public ResponseEntity<?> deletePelicula(@PathVariable("id") int id){
@@ -78,6 +82,12 @@ public class PeliculaController {
         }
     }
 
+    /**
+     * este método añade películas desde el cliente a la base de datos, comprueba si existe y si no existe, la añade
+     * @param pelicula es un objeto de tipo película con sus atributos
+     * @return si ha podido añadir la película o no
+     * @throws SQLException da error si no puede añadir la película al map de películas
+     */
     @CrossOrigin(origins = "*")
     @PostMapping("/peliculas")
     public ResponseEntity<?> addPelicula(@RequestBody Pelicula pelicula) {
@@ -95,7 +105,11 @@ public class PeliculaController {
         }
     }
 
-
+    /**
+     * Actualiza algún atributo de la película si esta existe en la base de datos
+     * @param pelicula se pasa la película a modificar
+     * @return la película actualizada o un código de error si no ha podido hacer la actualización
+     */
     @PutMapping("/peliculas")
     public ResponseEntity<?> updatePelicula(@RequestBody Pelicula pelicula) {
         try {

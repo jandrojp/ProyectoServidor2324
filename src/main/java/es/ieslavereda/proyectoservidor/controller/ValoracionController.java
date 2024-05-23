@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * @author: Alejandro Jorge, Alejandro Paul, Marcos Martínez
+ * version: 2024 v1
+ */
 @RestController
 @RequestMapping("/miraveredaAPI")
 public class ValoracionController {
@@ -19,6 +22,12 @@ public class ValoracionController {
     @Autowired
     private ValoracionService valoracionService;
 
+    /**
+     * se recoge la valoración realizada por el usuario
+     * @param valoracion
+     * @return si se ha almacenado la valoración
+     * @throws SQLException si se ha producido un error durante el proceso
+     */
     @CrossOrigin(origins = "*")
     @PostMapping("/valoraciones")
     public ResponseEntity<?> addValoracion(@RequestBody Valoracion valoracion) {
