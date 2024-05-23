@@ -10,13 +10,21 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author: Alejandro Jorge, Alejandro Paul, Marcos Martínez
+ * version: 2024 v1
+ */
 @RestController
 @RequestMapping("/miraveredaAPI")
+
 public class PeliculaController {
 
     @Autowired
     private PeliculaService service;
 
+    /**
+     * @return map de películas si las ha podido localizar y error si no ha podido hacerlo
+     */
     @CrossOrigin(origins = "*")
     @GetMapping("/peliculas")
     public ResponseEntity<?> getAllPeliculas() {
@@ -31,6 +39,12 @@ public class PeliculaController {
         }
     }
 
+    /**
+     *
+     * @param id a partir del id de la película que es su PK, se devuelve la película
+     * @return devuelve la película a partir del entero pasado por parámetro o si no lo ha encontrado
+     * @throws SQLException si no encuentra la película por ese Id, devuelve una excepción informando al usuario
+     */
     @GetMapping("/peliculas/{id}")
     public ResponseEntity<?> getByID(@PathVariable("id") int id){
         try {
