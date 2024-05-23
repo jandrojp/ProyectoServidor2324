@@ -80,7 +80,7 @@ public class UsuarioController {
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @CrossOrigin(origins = "*")
     @PostMapping("/usuarios/autenticar")
     public ResponseEntity<?> authenticate(@RequestBody String usuario, String contrasenya) {
         try {
