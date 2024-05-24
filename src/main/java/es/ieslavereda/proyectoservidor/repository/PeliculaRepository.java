@@ -6,9 +6,19 @@ import org.springframework.stereotype.Repository;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @author: Alejandro Jorge, Alejandro Paul, Marcos Martínez
+ * version: 2024 v1
+ */
 @Repository
 public class PeliculaRepository implements IPeliculaRepository {
+    /**
+     * implementa el CRUD definido en la interfaz
+     * método que permite actualizar la puntuación de la película que se pasa por parámetro
+     * @param pelicula
+     * @return película actualizada o null si la película no se encuentra en la base de datos
+     * @throws SQLException
+     */
 
     @Override
     public Pelicula updatePelicula(Pelicula pelicula) throws SQLException {
@@ -42,7 +52,12 @@ public class PeliculaRepository implements IPeliculaRepository {
         return pelicula;
     }
 
-
+    /**
+     * permite eliminar una película a partir de su id
+     * @param id identificador de la película que se desea borrar
+     * @return null si no existe la película con ese id, o la película que se ha borrado si se ejecuta la acción
+     * @throws SQLException
+     */
 
     @Override
     public Pelicula deletePelicula(int id) throws SQLException {
@@ -61,7 +76,11 @@ public class PeliculaRepository implements IPeliculaRepository {
     }
 
 
-
+    /**
+     * A través de una consulta al a base de datos, obtiene un listado con las películas
+     * @return Una lista de películas
+     * @throws SQLException
+     */
 
     @Override
     public List<Pelicula> getAllPeliculas() throws SQLException {
@@ -92,6 +111,12 @@ public class PeliculaRepository implements IPeliculaRepository {
         return peliculas;
     }
 
+    /**
+     * obtiene una película de la base de datos a partir de su id
+     * @param id de la película que se quiere obtener
+     * @return devuelve la película solicitada
+     * @throws SQLException
+     */
 
     @Override
     public Pelicula getPelicula(int id) throws SQLException {
@@ -120,11 +145,17 @@ public class PeliculaRepository implements IPeliculaRepository {
         return pelicula;
     }
 
+    /**
+     * Añade una película a la base de datos utilizando una query con los atributos de la película
+     * @param pelicula se pasa el objeto película que se quiere añadir
+     * @return la película introducida. Si ya existe, devuelve null.
+     * @throws SQLException
+     */
     @Override
     public Pelicula addPelicula(Pelicula pelicula) throws SQLException {
         String query = "INSERT INTO contenido (idcontenido, TIPO, TITULO, IDIOMA, GENERO, DESCRIPCION, DIRECTOR, ACTORES, DURACION, VALORACION_MEDIA) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Pelicula pelicula1 = getPelicula(pelicula.getId());
-
+    //comprueba si la película a introducir existe ya en la BBDD
         if (pelicula1 != null)
             return null;
 
@@ -146,19 +177,4 @@ public class PeliculaRepository implements IPeliculaRepository {
         return pelicula1;
     }
 
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

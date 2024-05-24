@@ -9,10 +9,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+/**
+ * @author: Alejandro Jorge, Alejandro Paul, Marcos Martínez
+ * version: 2024 v1
+ */
 @Repository
 public class ValoracionRepository implements IValoracionRepository {
-
+    /**
+     * recoge la valoración que hace el cliente de un contenido y lo pasa a la BDD para calcular la media,
+     * luego recoge la puntuación media y la muestra
+     * @param valoracion
+     * @return valoración introducida por el usuario
+     * @throws SQLException
+     */
 
     @Override
     public Valoracion addValoracion(Valoracion valoracion) throws SQLException {
@@ -31,6 +40,12 @@ public class ValoracionRepository implements IValoracionRepository {
         return valoracion;
     }
 
+    /**
+     * obtiene la valoración media de un contenido
+     * @param idValoracion
+     * @return
+     * @throws SQLException
+     */
     @Override
     public Valoracion getValoracion(int idValoracion) throws SQLException {
         Valoracion valoracion = null;

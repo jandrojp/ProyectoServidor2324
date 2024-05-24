@@ -6,7 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.sql.SQLException;
 import java.util.List;
-
+/**
+ * se realiza el CRUD del usuario a partir de su Pk que es el DNI
+ * @author: Alejandro Jorge, Alejandro Paul, Marcos Martínez
+ * version: 2024 v1
+ */
 @Service
 public class UsuarioService {
     @Autowired

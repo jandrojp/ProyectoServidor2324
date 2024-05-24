@@ -9,7 +9,11 @@ import org.springframework.stereotype.Service;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
+/**
+ * Se añade la valoración al repositorio
+ * @author: Alejandro Jorge, Alejandro Paul, Marcos Martínez
+ * version: 2024 v1
+ */
 @Service
 public class ValoracionService {
 

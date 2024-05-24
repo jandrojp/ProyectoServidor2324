@@ -7,6 +7,11 @@ import org.springframework.stereotype.Service;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Realiza el CRUD de películas referenciando al Id contenido
+ * @author: Alejandro Jorge, Alejandro Paul, Marcos Martínez
+ * version: 2024 v1
+ */
 
 @Service
 public class PeliculaService {
