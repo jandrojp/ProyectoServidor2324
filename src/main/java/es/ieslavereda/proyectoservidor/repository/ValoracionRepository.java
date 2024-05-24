@@ -42,19 +42,19 @@ public class ValoracionRepository implements IValoracionRepository {
 
     /**
      * obtiene la valoración media de un contenido
-     * @param idValoracion
+     * @param idContenido
      * @return
      * @throws SQLException
      */
     @Override
-    public Valoracion getValoracion(int idValoracion) throws SQLException {
+    public Valoracion getValoracion(int idContenido) throws SQLException {
         Valoracion valoracion = null;
-        String query = "SELECT * FROM valoracion WHERE idValoracion = ?";
+        String query = "SELECT * FROM valoracion WHERE idContenido = ?";
 
         try (Connection connection = DataSource.getMyOracleDataSource().getConnection();
              PreparedStatement ps = connection.prepareStatement(query)){
 
-            ps.setInt(1,idValoracion);
+            ps.setInt(1,idContenido);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next())

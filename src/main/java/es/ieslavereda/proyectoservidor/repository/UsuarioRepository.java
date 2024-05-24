@@ -210,7 +210,7 @@ public class UsuarioRepository implements IUsuarioRepository {
     public boolean authenticate(String login, String passwd) throws SQLException {
         boolean autenticado = false;
 
-        String query = "SELECT COUNT(*) FROM EMPLEADO WHERE usuario = ? AND contraseña = ?";
+        String query = "SELECT COUNT(*) FROM cliente WHERE usuario = ? AND contraseña = ?";
         try (Connection connection = DataSource.getMyOracleDataSource().getConnection();
             PreparedStatement ps = connection.prepareStatement(query)
         ){
